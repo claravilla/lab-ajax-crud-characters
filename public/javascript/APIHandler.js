@@ -14,7 +14,7 @@ class APIHandler {
   }
 
   getOneRegister (id) {
-    axios.get(this.BASE_URL+"/characters/:id")
+    axios.get(this.BASE_URL+"/characters/:"+id)
     .then((data)=>{
       console.log(data);
     })
@@ -34,9 +34,13 @@ class APIHandler {
   }
 
   updateOneRegister (id,newInfo) {
-    axios.put(this.BASE_URL+"/characters/:id", newInfo)
+    axios.put(this.BASE_URL+"/characters/:"+id, newInfo)
     .then((data)=>{
-      console.log(data);
+      if(data)  {
+        console.log(data);   
+      } else {
+        console.log("Character not found");
+      }
     })
     .catch((error)=>{
       console.log(error);
@@ -46,7 +50,12 @@ class APIHandler {
   deleteOneRegister (id) {
     axios.delete(this.BASE_URL+"/characters/:id")
     .then((data)=>{
-      console.log(data);
+      if (data) {
+        console.log("Character has been successfully deleted");
+      } else {
+        console.log("Character not found");
+      }
+    
     })
     .catch((error)=>{
       console.log(error);
