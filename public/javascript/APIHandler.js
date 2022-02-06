@@ -1,64 +1,29 @@
+
+
 class APIHandler {
   constructor (baseUrl) {
     this.BASE_URL = baseUrl;
   }
 
   getFullList () {
-       axios.get(this.BASE_URL+"/characters")
-       .then((data)=>{
-         console.log(data);
-       })
-       .catch((error)=>{
-         console.log(error);
-       })
+      return axios.get(this.BASE_URL+"/characters");
+    
   }
 
   getOneRegister (id) {
-    axios.get(this.BASE_URL+"/characters/:"+id)
-    .then((data)=>{
-      console.log(data);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+    return axios.get(this.BASE_URL+"/characters/:"+id)
   }
 
   createOneRegister (newInfo) {
-     axios.post(this.BASE_URL+"/characters", newInfo)
-     .then((data)=>{
-      console.log(data);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+     return axios.post(this.BASE_URL+"/characters", newInfo)
   }
 
   updateOneRegister (id,newInfo) {
-    axios.put(this.BASE_URL+"/characters/:"+id, newInfo)
-    .then((data)=>{
-      if(data)  {
-        console.log(data);   
-      } else {
-        console.log("Character not found");
-      }
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+    return axios.put(this.BASE_URL+"/characters/:"+id, newInfo)
   }
 
   deleteOneRegister (id) {
-    axios.delete(this.BASE_URL+"/characters/:id")
-    .then((data)=>{
-      if (data) {
-        console.log("Character has been successfully deleted");
-      } else {
-        console.log("Character not found");
-      }
-    
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+    return axios.delete(this.BASE_URL+"/characters/:id")
   }
 }
+
