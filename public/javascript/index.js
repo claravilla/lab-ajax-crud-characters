@@ -7,10 +7,12 @@ window.addEventListener('load', () => {
     .then((foundData) => {
       let data = foundData.data
       console.log(data);
+      document.querySelector(".characters-container").innerHTML = ""
       for (i=0;i<data.length;i++) {
         let newCard = document.createElement("div");
         newCard.classList.add("character-info");
         newCard.innerHTML =`
+        <div class="id">Character Id: ${data[i].id}</div>
         <div class="name">Character Name: ${data[i].name}</div>
           <div class="occupation">Character Occupation: ${data[i].occupation}</div>
           <div class="cartoon">Is a Cartoon: ${data[i].cartoon}</div>
@@ -27,6 +29,23 @@ window.addEventListener('load', () => {
   });
 
   document.getElementById('fetch-one').addEventListener('click', function (event) {
+    let id = document.querySelector("input", name="character-id").value;
+    console.log(id);
+    charactersAPI.getOneRegister(id)
+    .then((foundData)=>{
+      let data = foundData.data;
+      let newCard = document.createElement("div");
+        newCard.classList.add("character-info");
+        newCard.innerHTML =`
+        <div class="id">Character Id: ${data.id}</div>
+        <div class="name">Character Name: ${data.name}</div>
+          <div class="occupation">Character Occupation: ${data.occupation}</div>
+          <div class="cartoon">Is a Cartoon: ${data.cartoon}</div>
+          <div class="weapon">Character Weapon: ${data.weapon}</div>
+        </div>
+       `;
+       document.querySelector("#fetch-one").appendChild(newCard);
+    })
 
   });
 
