@@ -29,8 +29,7 @@ window.addEventListener('load', () => {
   });
 
   document.getElementById('fetch-one').addEventListener('click', function (event) {
-    let id = document.querySelector("input", name="character-id").value;
-    console.log(id);
+    let id = document.getElementById("character-id").value;
     charactersAPI.getOneRegister(id)
     .then((foundData)=>{
       let data = foundData.data;
@@ -44,13 +43,28 @@ window.addEventListener('load', () => {
           <div class="weapon">Character Weapon: ${data.weapon}</div>
         </div>
        `;
-       document.querySelector("#fetch-one").appendChild(newCard);
+       document.querySelector(".operation").appendChild(newCard);
+    })
+    .catch((error)=> {
+      console.log(error);
     })
 
   });
 
   document.getElementById('delete-one').addEventListener('click', function (event) {
-
+    let id = document.getElementById("character-id-delete").value;
+    charactersAPI.deleteOneRegister(id)
+    .then(()=>{
+      let newMessage = document.createElement("div");
+      newMessage.innerHTML = "Character has been deleted"
+      document.querySelector(".operation delete").appendChild(newMessage);
+    })
+    .catch((error)=>{
+      console.log(error);
+        let newMessage = document.createElement("div");
+        newMessage.innerHTML = error;
+        document.querySelector(".operation delete").appendChild(newMessage);
+    })
   });
 
   document.getElementById('edit-character-form').addEventListener('submit', function (event) {
