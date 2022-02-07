@@ -8,7 +8,6 @@ window.addEventListener("load", () => {
         .getFullList()
         .then((foundData) => {
           let data = foundData.data;
-          console.log(data);
           document.querySelector(".characters-container").innerHTML = "";
           for (i = 0; i < data.length; i++) {
             let newCard = document.createElement("div");
@@ -70,7 +69,6 @@ window.addEventListener("load", () => {
         .catch((error) => {
           console.log(error);
           let newError = document.createElement("div");
-          console.log(newError);
           newError.innerHTML = `<p>${error}</p>`;
           document.querySelector(".operation.delete").appendChild(newError);
         });
@@ -78,7 +76,32 @@ window.addEventListener("load", () => {
 
   document
     .getElementById("edit-character-form")
-    .addEventListener("submit", function (event) {});
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      let updateId = document.getElementById("change-id").value;
+      let updateName = document.getElementById("change-name").value;
+      let updateOccupation = document.getElementById("change-occupation").value;
+      let updateWeapon = document.getElementById("change-weapon").value;
+      let updateCartoon = document.getElementById("change-cartoon").checked;
+      charactersAPI
+        .updateOneRegister(updateId, {
+          name: updateName,
+          occupation: updateOccupation,
+          weapon: updateWeapon,
+          cartoon: updateCartoon,
+        })
+        .then(() => {
+          let newUpdate = document.createElement("div");
+          newUpdate.innerHTML = "Character has been updated";
+          document.getElementById("change-update").appendChild(newUpdate);
+        })
+        .catch((error) => {
+          console.log(error);
+          let changeError = document.createElement("div");
+          changeError.innerHTML = `<p>${error}</p>`;
+          document.getElementById("change-update").appendChild(changeError);
+        });
+    });
 
   document
     .getElementById("new-character-form")
