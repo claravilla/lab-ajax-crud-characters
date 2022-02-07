@@ -13,6 +13,13 @@
       "occupation": "Lives under the sea",
       "weapon": "Crabby Patty",
       "cartoon": true
+    },
+    {
+      "name": "Ken Shiro",
+      "occupation": "Saviour",
+      "weapon": "His hands",
+      "cartoon": true,
+      "id": 4
     }
   ]
 }
